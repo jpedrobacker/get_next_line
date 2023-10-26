@@ -6,7 +6,7 @@
 /*   By: jbergfel <jbergfel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 12:03:26 by jbergfel          #+#    #+#             */
-/*   Updated: 2023/10/26 15:03:22 by jbergfel         ###   ########.fr       */
+/*   Updated: 2023/10/26 19:53:25 by jbergfel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,34 @@
 
 char	*get_next_line(int fd)
 {
-	static char	*str;
-	char		*line;
+	int		byte;
+	char	*str_buffer;
 
-	if (fd < 0 || BUFFER_SIZE <= 0)
+	if (BUFFER_SIZE < 1 || fd < 0)
 		return (NULL);
-	str = read_s(fd, str);
+	str_buffer = (char *)malloc((BUFFER_SIZE + 1) * sizeof(char));
+	if (!str_buffer)
+		return (NULL);
 }
 
-char	*read_s(int fd, char *str)
+/*
+int main(void)
 {
-	
+	int		fd;
+	char	*str;
+	char	*path;
+	int		i;
+
+	path = "text.txt";
+	fd = open(path, O_RDONLY);
+	i = 0;
+	while (i < 6)
+	{
+		str = get_next_line(fd);
+		printf("fd: %i, %s\n", fd, str);
+		i++;
+	}
+	close(fd);
+	return (0);
 }
+*/

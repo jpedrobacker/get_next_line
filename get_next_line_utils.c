@@ -6,7 +6,7 @@
 /*   By: jbergfel <jbergfel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 12:03:18 by jbergfel          #+#    #+#             */
-/*   Updated: 2023/10/26 12:54:30 by jbergfel         ###   ########.fr       */
+/*   Updated: 2023/10/26 19:31:46 by jbergfel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ size_t	ft_strlen(char *s)
 
 	i = 0;
 	if (!s)
-		return (NULL);
+		return (0);
 	while (s[i] != '\0')
 		i++;
 	return (i);
