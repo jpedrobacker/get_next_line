@@ -63,14 +63,14 @@ char	*remove_line(char *backup)
 
 char	*get_next_line(int fd)
 {
-	static char		*byte;
-	char	*line;
+	static char		*lines;
+	char			*read;
 
 	if (BUFFER_SIZE < 1 || fd < 0)
 		return (NULL);
-	line = read_file(fd, line);
-	if (!line)
+	read = read_file(fd, read);
+	if (!read)
 		return (NULL);
-	byte = get_line(line);
-	return (line);
+	lines = get_line(read);
+	return (read);
 }
