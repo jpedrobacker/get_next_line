@@ -2,14 +2,20 @@
 
 int main(void)
 {
-	int fd;
-	char buf[256];
-	int chars_read;
+	int		fd;
+	char	*str;
+	char	*path;
+	int		i;
 
-	fd = open("text.txt", O_RDONLY);
-	while (chars_read = read(fd, buf, 25))
+	path = "text.txt";
+	fd = open(path, O_RDONLY);
+	i = 0;
+	while (i < 6)
 	{
-		buf[chars_read] = '\0';
-		printf("buf-> %s\n",buf);
+		str = get_next_line(fd);
+		printf("fd: %i, %s\n", fd, str);
+		i++;
 	}
+	close(fd);
+	return (0);
 }
