@@ -56,16 +56,21 @@ static char	*get_line(char *backup)
 	return (line);
 }
 
+char	*remove_line(char *backup)
+{
+	//remove a linha lida
+}
+
 char	*get_next_line(int fd)
 {
-	int		byte;
-	char	*str_buffer;
+	static char		*byte;
+	char	*line;
 
 	if (BUFFER_SIZE < 1 || fd < 0)
 		return (NULL);
-	str_buffer = (char *)malloc((BUFFER_SIZE + 1) * sizeof(char));
-	if (!str_buffer)
+	line = read_file(fd, line);
+	if (!line)
 		return (NULL);
-	str_buffer = read_file(fd, str_buffer);
-
+	byte = get_line(line);
+	return (line);
 }
