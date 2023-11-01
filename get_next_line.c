@@ -6,72 +6,74 @@
 /*   By: jbergfel <jbergfel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 12:03:26 by jbergfel          #+#    #+#             */
-/*   Updated: 2023/11/01 15:58:09 by jbergfel         ###   ########.fr       */
+/*   Updated: 2023/11/01 17:28:39 by jbergfel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-static char	*read_file(int fd, char *line)
+static char	*read_file(int fd, char *buffer, char *extra)
 {
-	char	*buffer;
-	int		readb;
+	int		read_file;
+	char	*temp;
 
-	buffer = (char *)malloc((BUFFER_SIZE + 1) * sizeof(char));
-	if (!buffer)
-		return (NULL);
-	readb = 1;
-	while (readb > 0 && !ft_strchr(line, '\n'))
+	read_file = 1;
+	while (read_file != '\0')
 	{
-		readb = read(fd, buffer, BUFFER_SIZE);
-		if (readb < 0)
+		read_file = read(fd, buffer, BUFFER_SIZE);
+		if (read_file == -1)
+			return (NULL);
+		else if (read_file == 0)
 			break;
-		buffer[readb] = '\0';
-		line = ft_strjoin(line, buffer);
+		buffer[read_file] = '\0';
+		if (!extra)
+			extra = ft_strdup("");
+		temp = extra;
+		extra = ft_strjoin(temp, buffer);
+		free(temp);
+		temp = NULL;
+		if (ft_strchr(buffer, '\n'))
+			break;
 	}
-	free(buffer);
-	if (readb < 0)
-		return (NULL);
-	else
-		return (line);
+	return (extra);
 }
 
-static char	*get_line(char *line)
+static char	*extract_line(char *line)
 {
-	char	*text;
-	size_t	size;
+	size_t	i;
+	char	*extra;
 
-	if (!*line)
+	i = 0;
+	while(line[i] != '\0' && line[i] != '\n')
+		i++;
+	if (line[i] == '\0' && line[1] == '\0')
 		return (NULL);
-	size = 0;
-	while (line[size] && line[size] != '\n')
-		size++;
-	text = (char *)malloc(sizeof(char) * (size + 2));
-	if (!text)
-		return (NULL);
-	ft_strlcpy(text, line, size);
-	if (line[size] == '\n')
-		text[size++] = '\n';
-	text[size] = '\0';
-	return (text);
-}
-
-static char	*remove_line(char *next_line)
-{
-	//remove line function
+	extra = ft_substr(line, i + 1, ft_strlen(line) - i);
+	if (*extra == '\0')
+	{
+		free(extra);
+		extra = NULL;
+	}
+	line[i + 1] = '\0';
+	return (extra);
 }
 
 char	*get_next_line(int fd)
 {
-	static char	*next_line;
+	static char	*extra;
 	char		*line;
+	char		*buffer;
 
-	if (BUFFER_SIZE < 1 || fd < 0)
+	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-	next_line = read_file(fd, next_line);
-	if (!next_line)
+	buffer = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
+	if (!buffer)
 		return (NULL);
-	line = get_line(next_line);
-	next_line = remove_line(next_line);
+	line = read_file(fd, buffer, extra);
+	free(buffer);
+	buffer = NULL;
+	if (!line)
+		return (NULL);
+	extra = extract_line(line);
 	return (line);
 }

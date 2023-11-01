@@ -10,8 +10,14 @@ int main(void)
 
 	path = "text.txt";
 	fd = open(path, O_RDONLY);
-	str = get_next_line(fd);
-	printf("fd: %i, %s\n", fd, str);
+	while (1)
+	{
+		str = get_next_line(fd);
+		if (str == NULL)
+			break;
+		printf("%s\n", str);
+		free(str);
+	}
 	close(fd);
 	return (0);
 }

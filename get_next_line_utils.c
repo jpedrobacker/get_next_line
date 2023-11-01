@@ -6,7 +6,7 @@
 /*   By: jbergfel <jbergfel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 12:03:18 by jbergfel          #+#    #+#             */
-/*   Updated: 2023/11/01 15:41:07 by jbergfel         ###   ########.fr       */
+/*   Updated: 2023/11/01 17:21:53 by jbergfel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,24 @@ char	*ft_strchr(const char *str, int c)
 	return (stri + i);
 }
 
+char	*ft_strdup(const char *src)
+{
+	int		j;
+	char	*dst;
+
+	j = 0;
+	dst = malloc(ft_strlen(src) + 1);
+	if (!dst)
+		return (0);
+	while (src[j])
+	{
+		dst[j] = src[j];
+		j++;
+	}
+	dst[j] = '\0';
+	return (dst);
+}
+
 char	*ft_strjoin(const char *str1, const char *str2)
 {
 	int		i;
@@ -48,6 +66,8 @@ char	*ft_strjoin(const char *str1, const char *str2)
 	i = 0;
 	lenstr1 = ft_strlen(str1);
 	lenstr2 = ft_strlen(str2);
+	if (!str1)
+		return (ft_strdup(""));
 	if (!str1 && !str2)
 		return (NULL);
 	str = (char *)malloc(lenstr1 + lenstr2 + 1);
@@ -65,18 +85,26 @@ char	*ft_strjoin(const char *str1, const char *str2)
 	return (str);
 }
 
-size_t	ft_strlcpy(char *dst, const char *src, size_t size)
+char	*ft_substr(const char *src, unsigned int start, size_t len)
 {
 	size_t	i;
+	size_t	j;
+	char	*dst;
 
+	dst = (char *)malloc(sizeof(*src) * (len + 1));
+	if (!dst)
+		return (NULL);
 	i = 0;
-	if (size < 1)
-		return (ft_strlen(src));
-	while (src[i] != '\0' && i < size - 1)
+	j = 0;
+	while (src[i])
 	{
-		dst[i] = src[i];
+		if (i >= start && j < len)
+		{
+			dst[j] = src[i];
+			j++;
+		}
 		i++;
 	}
-	dst[i] = '\0';
-	return (ft_strlen(src));
+	dst[j] = '\0';
+	return (dst);
 }
