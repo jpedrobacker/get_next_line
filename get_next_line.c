@@ -6,7 +6,7 @@
 /*   By: jbergfel <jbergfel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 12:03:26 by jbergfel          #+#    #+#             */
-/*   Updated: 2023/11/01 17:40:16 by jbergfel         ###   ########.fr       */
+/*   Updated: 2023/11/01 17:42:06 by jbergfel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,7 @@ char	*get_next_line(int fd)
 	if (!buffer)
 		return (NULL);
 	line = read_file(fd, buffer, extra);
-	free(buffer);
-	buffer = NULL;
+	buffer = ft_free(buffer);
 	if (!line)
 		return (NULL);
 	extra = extract_line(line);
