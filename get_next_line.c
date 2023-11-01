@@ -6,11 +6,18 @@
 /*   By: jbergfel <jbergfel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 12:03:26 by jbergfel          #+#    #+#             */
-/*   Updated: 2023/11/01 17:28:39 by jbergfel         ###   ########.fr       */
+/*   Updated: 2023/11/01 17:40:16 by jbergfel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+
+static char	*ft_free(char *to_free)
+{
+	free(to_free);
+	to_free = NULL;
+	return (to_free);
+}
 
 static char	*read_file(int fd, char *buffer, char *extra)
 {
@@ -30,8 +37,7 @@ static char	*read_file(int fd, char *buffer, char *extra)
 			extra = ft_strdup("");
 		temp = extra;
 		extra = ft_strjoin(temp, buffer);
-		free(temp);
-		temp = NULL;
+		temp = ft_free(temp);
 		if (ft_strchr(buffer, '\n'))
 			break;
 	}
@@ -50,10 +56,7 @@ static char	*extract_line(char *line)
 		return (NULL);
 	extra = ft_substr(line, i + 1, ft_strlen(line) - i);
 	if (*extra == '\0')
-	{
-		free(extra);
-		extra = NULL;
-	}
+		extra = ft_free(extra);
 	line[i + 1] = '\0';
 	return (extra);
 }
