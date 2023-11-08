@@ -6,7 +6,7 @@
 /*   By: jbergfel <jbergfel@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 12:03:26 by jbergfel          #+#    #+#             */
-/*   Updated: 2023/11/07 16:22:17 by jbergfel         ###   ########.fr       */
+/*   Updated: 2023/11/08 18:03:39 by jbergfel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static char	*read_file(int fd, char *buffer, char *extra)
 	char	*temp;
 
 	read_file = 1;
-	while (read_file != '\0')
+	while (read_file != '\n')
 	{
 		read_file = read(fd, buffer, BUFFER_SIZE);
 		if (read_file == -1)
