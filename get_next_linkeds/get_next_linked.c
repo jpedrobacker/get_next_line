@@ -1,6 +1,6 @@
 #include "get_next_linked.h"
 
-char    *get_line(t_list *list)
+char    *make_list(t_list **list, int fd)
 {
 
 }
@@ -13,5 +13,5 @@ char    *get_next_line(int fd)
     list = NULL;
     if (fd < 0 || BUFFER_SIZE <= 0)
 	return (NULL);
-    list = ft_lstnew(list);
+    make_list(&list, fd);
 }

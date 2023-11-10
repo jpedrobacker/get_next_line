@@ -1,46 +1,33 @@
 #include "get_next_linked.h"
 
-void	*ft_lstnew(void **list, int fd)
+void	find_line(t_list *list)
 {
-	t_list	*new;
+    int i;
     
-    while (!to_find)
+    if (NULL == list)
+        return (NULL);
+    while (list)
+    {
+        i = 0;
+        while(list->content[i] && i < BUFFER_SIZE)
+        {
+            if (list->content[i] == '\n')
+                return (1);
+            i++;
+        }
+        list = list->next;
+    }
+    return (NULL);
 }
 
-void	ft_lstadd_back(t_list **lst, t_list *new)
+t_list	*ft_lstlast(t_list *lst)
 {
 	t_list	*temp;
 
-	if (lst != NULL)
-	{
-		if (*lst == NULL)
-			*lst = new;
-		else
-		{
-			temp = ft_lstlast(*(lst));
-			temp->next = new;
-		}
-	}
-}
-
-void	ft_lstclear(t_list **lst, void (*del)(void *))
-{
-	t_list	*begin;
-	t_list	*temp;
-
-	begin = (*(lst));
-	while (begin != NULL)
-	{
-		temp = begin->next;
-		ft_lstdelone(begin, del);
-		begin = temp;
-	}
-	*lst = NULL;
-}
-
-void	ft_lstdelone(t_list *lst, void (*del)(void *))
-{
-	del(lst->content);
-	free(lst);
-	lst = NULL;
+	temp = lst;
+	if (temp == NULL)
+		return (NULL);
+	while (temp->next != NULL)
+		temp = temp->next;
+	return (temp);
 }
