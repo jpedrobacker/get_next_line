@@ -50,7 +50,7 @@ static char	*extract_line(char *line)
 	char	*extra;
 
 	i = 0;
-	while(line[i] != '\0' && line[i] != '\n')
+	while(line[i] != '\n')
 		i++;
 	if (line[i] == '\0' && line[1] == '\0')
 		return (NULL);
