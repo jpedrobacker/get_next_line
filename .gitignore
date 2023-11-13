@@ -2,5 +2,5 @@
 *.exe
 *.swp
 *.swo
-*.vscode
+.vscode
 gnlTester

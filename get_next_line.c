@@ -6,26 +6,26 @@
 /*   By: jbergfel <jbergfel@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 12:03:26 by jbergfel          #+#    #+#             */
-/*   Updated: 2023/11/08 18:03:39 by jbergfel         ###   ########.fr       */
+/*   Updated: 2023/11/13 10:42:33 by jbergfel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-static char	*ft_free(char *to_free)
+char	*ft_free(char *to_free)
 {
 	free(to_free);
 	to_free = NULL;
 	return (to_free);
 }
 
-static char	*read_file(int fd, char *buffer, char *extra)
+char	*read_file(int fd, char *buffer, char *extra)
 {
 	int		read_file;
 	char	*temp;
 
 	read_file = 1;
-	while (read_file != '\n')
+	while (read_file != '\0')
 	{
 		read_file = read(fd, buffer, BUFFER_SIZE);
 		if (read_file == -1)
@@ -44,15 +44,15 @@ static char	*read_file(int fd, char *buffer, char *extra)
 	return (extra);
 }
 
-static char	*extract_line(char *line)
+char	*extract_line(char *line)
 {
 	size_t	i;
 	char	*extra;
 
 	i = 0;
-	while(line[i] != '\n')
+	while(line[i] != '\0' && line[i] != '\n')
 		i++;
-	if (line[i] == '\0' && line[1] == '\0')
+	if (line[i] == '\0')
 		return (NULL);
 	extra = ft_substr(line, i + 1, ft_strlen(line) - i);
 	if (*extra == '\0')

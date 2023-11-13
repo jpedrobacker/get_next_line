@@ -6,7 +6,7 @@
 /*   By: jbergfel <jbergfel@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 12:03:18 by jbergfel          #+#    #+#             */
-/*   Updated: 2023/11/07 16:22:13 by jbergfel         ###   ########.fr       */
+/*   Updated: 2023/11/13 10:25:07 by jbergfel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ char	*ft_strjoin(const char *str1, const char *str2)
 		return (ft_strdup(""));
 	if (!str1 && !str2)
 		return (NULL);
-	str = (char *)malloc(lenstr1 + lenstr2 + 1);
+	str = (char *)malloc(sizeof(char) * (lenstr1 + lenstr2 + 1));
 	if (!str)
 		return (NULL);
 	while (i < lenstr1 || i < lenstr2)
