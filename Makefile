@@ -4,4 +4,4 @@ FLAGS =	-Wall -Werror -Wextra
 CC =	cc
 
 run:
-	$(CC) $(FLAGS) -D BUFFER_SIZE=42 $(SRC) maintest.c -o saida.out
+	$(CC) $(FLAGS) -D BUFFER_SIZE=3 $(SRC) maintest.c -o saida.out
