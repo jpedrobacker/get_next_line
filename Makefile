@@ -9,5 +9,5 @@ CC =	cc
 run:
 	$(CC) $(FLAGS) -D BUFFER_SIZE=3 $(SRC) maintest.c -o saida.out
 
-run bonus:
-			$(CC) $(FLAGS) -D BUFFER_SIZE=3 $(SRC_BONUS) maintest.c -o saida_bonus.out
+bonus:
+		$(CC) $(FLAGS) -D BUFFER_SIZE=3 $(SRC_BONUS) maintest.c -o saida_bonus.out
