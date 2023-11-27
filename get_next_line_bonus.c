@@ -6,7 +6,7 @@
 /*   By: jbergfel <jbergfel@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/26 12:29:59 by jbergfel          #+#    #+#             */
-/*   Updated: 2023/11/26 12:30:01 by jbergfel         ###   ########.fr       */
+/*   Updated: 2023/11/27 14:42:52 by jbergfel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,19 +63,19 @@ char	*extract_line(char *line)
 
 char	*get_next_line(int fd)
 {
-	static char	*extra;
+	static char	*extra[420];
 	char		*line;
-	char		*buffer;
+	char		*buffer[420];
 
-	if (fd < 0 || BUFFER_SIZE <= 0)
+	if (fd < 0 || BUFFER_SIZE <= 0 || fd > MAX_FD || fd > 420)
 		return (NULL);
-	buffer = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
-	if (!buffer)
+	buffer[fd] = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
+	if (!buffer[fd])
 		return (NULL);
-	line = read_file(fd, buffer, extra);
-	buffer = ft_free(buffer);
+	line = read_file(fd, buffer[fd], extra[fd]);
+	buffer[fd] = ft_free(buffer[fd]);
 	if (!line)
 		return (NULL);
-	extra = extract_line(line);
+	extra[fd] = extract_line(line);
 	return (line);
 }
