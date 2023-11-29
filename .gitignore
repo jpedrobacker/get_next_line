@@ -5,3 +5,5 @@
 .vscode
 gnlTester
 42test-gnl-station-2022
+maintest.c
+Makefile
