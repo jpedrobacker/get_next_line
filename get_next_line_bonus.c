@@ -1,18 +1,6 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: jbergfel <jbergfel@student.42.rio>         +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/26 12:29:59 by jbergfel          #+#    #+#             */
-/*   Updated: 2023/11/27 14:42:52 by jbergfel         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "get_next_line_bonus.h"
 
-char	*ft_free(char *to_free)
+char	*my_free(char *to_free)
 {
 	free(to_free);
 	to_free = NULL;
@@ -34,11 +22,11 @@ char	*read_file(int fd, char *buffer, char *extra)
 			break;
 		buffer[read_file] = '\0';
 		if (!extra)
-			extra = ft_strdup("");
+			extra = my_strdup("");
 		temp = extra;
-		extra = ft_strjoin(temp, buffer);
-		temp = ft_free(temp);
-		if (ft_strchr(buffer, '\n'))
+		extra = my_strjoin(temp, buffer);
+		temp = my_free(temp);
+		if (my_strchr(buffer, '\n'))
 			break;
 	}
 	return (extra);
@@ -54,9 +42,9 @@ char	*extract_line(char *line)
 		i++;
 	if (line[i] == '\0')
 		return (NULL);
-	extra = ft_substr(line, i + 1, ft_strlen(line) - i);
+	extra = my_substr(line, i + 1, my_strlen(line) - i);
 	if (*extra == '\0')
-		extra = ft_free(extra);
+		extra = my_free(extra);
 	line[i + 1] = '\0';
 	return (extra);
 }
@@ -73,7 +61,7 @@ char	*get_next_line(int fd)
 	if (!buffer[fd])
 		return (NULL);
 	line = read_file(fd, buffer[fd], extra[fd]);
-	buffer[fd] = ft_free(buffer[fd]);
+	buffer[fd] = my_free(buffer[fd]);
 	if (!line)
 		return (NULL);
 	extra[fd] = extract_line(line);

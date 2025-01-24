@@ -1,18 +1,6 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   get_next_line_utils_bonus.c                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: jbergfel <jbergfel@student.42.rio>         +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/26 12:29:42 by jbergfel          #+#    #+#             */
-/*   Updated: 2023/11/26 12:29:45 by jbergfel         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "get_next_line_bonus.h"
 
-size_t	ft_strlen(const char *s)
+size_t	my_strlen(const char *s)
 {
 	size_t	i;
 
@@ -22,7 +10,7 @@ size_t	ft_strlen(const char *s)
 	return (i);
 }
 
-char	*ft_strchr(const char *str, int c)
+char	*my_strchr(const char *str, int c)
 {
 	int		i;
 	char	*stri;
@@ -38,13 +26,13 @@ char	*ft_strchr(const char *str, int c)
 	return (stri + i);
 }
 
-char	*ft_strdup(const char *src)
+char	*my_strdup(const char *src)
 {
 	int		j;
 	char	*dst;
 
 	j = 0;
-	dst = malloc(ft_strlen(src) + 1);
+	dst = malloc(my_strlen(src) + 1);
 	if (!dst)
 		return (0);
 	while (src[j])
@@ -56,7 +44,7 @@ char	*ft_strdup(const char *src)
 	return (dst);
 }
 
-char	*ft_strjoin(const char *str1, const char *str2)
+char	*my_strjoin(const char *str1, const char *str2)
 {
 	int		i;
 	int		lenstr1;
@@ -64,10 +52,10 @@ char	*ft_strjoin(const char *str1, const char *str2)
 	char	*str;
 
 	i = 0;
-	lenstr1 = ft_strlen(str1);
-	lenstr2 = ft_strlen(str2);
+	lenstr1 = my_strlen(str1);
+	lenstr2 = my_strlen(str2);
 	if (!str1)
-		return (ft_strdup(""));
+		return (my_strdup(""));
 	if (!str1 && !str2)
 		return (NULL);
 	str = (char *)malloc(sizeof(char) * (lenstr1 + lenstr2 + 1));
@@ -85,7 +73,7 @@ char	*ft_strjoin(const char *str1, const char *str2)
 	return (str);
 }
 
-char	*ft_substr(const char *src, unsigned int start, size_t len)
+char	*my_substr(const char *src, unsigned int start, size_t len)
 {
 	size_t	i;
 	size_t	j;
